@@ -25,27 +25,25 @@ export function ElephantSurprise({ onReveal }: ElephantSurpriseProps) {
   }
 
   return (
-    <motion.div
-      className="mt-2 flex w-full flex-col items-center gap-4 border-t border-rose-400/15 pt-6 sm:gap-5 sm:pt-7"
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.6 }}
-    >
-      <p className="font-[family-name:var(--font-playfair)] text-xs tracking-[0.15em] text-rose-200/50 uppercase sm:text-sm">
+    <div className="flex w-full flex-col items-center gap-4 sm:gap-5">
+      <p className="font-[family-name:var(--font-playfair)] text-xs tracking-[0.2em] text-rose-200/70 uppercase sm:text-sm sm:tracking-[0.25em]">
         Psst… one more thing
       </p>
-      <p className="max-w-[15rem] font-[family-name:var(--font-dancing)] text-lg text-rose-200/90 sm:max-w-xs sm:text-xl">
+      <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-4xl sm:text-5xl">
+        A secret surprise
+      </h2>
+      <p className="max-w-[16rem] font-[family-name:var(--font-playfair)] text-sm text-rose-200/80 italic sm:max-w-xs">
         {opened
-          ? "Ready to meet your surprise, baba?"
+          ? "Ready to meet them, baba?"
           : "Someone special helped with all of this…"}
       </p>
 
-      <div className="relative flex h-44 w-full max-w-xs items-center justify-center sm:h-48">
+      <div className="relative flex h-52 w-full max-w-xs items-center justify-center sm:h-56 sm:max-w-sm">
         <AnimatePresence mode="wait">
           {!opened && wiggle > 0 && (
             <motion.p
               key={wiggle}
-              className="absolute -top-2 left-1/2 z-20 w-full max-w-[14rem] -translate-x-1/2 text-center font-[family-name:var(--font-dancing)] text-base text-pink-200 sm:text-lg"
+              className="absolute -top-1 left-1/2 z-20 w-full max-w-[15rem] -translate-x-1/2 text-center font-[family-name:var(--font-dancing)] text-lg text-pink-200 sm:text-xl"
               initial={{ opacity: 0, y: 8, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8 }}
@@ -73,15 +71,15 @@ export function ElephantSurprise({ onReveal }: ElephantSurpriseProps) {
           whileTap={opened ? { scale: 0.92 } : { scale: 1.05 }}
         >
           <div
-            className={`flex min-h-[8.5rem] min-w-[8.5rem] flex-col items-center justify-center rounded-2xl border px-4 shadow-xl sm:min-h-[9rem] sm:min-w-[9rem] ${
+            className={`flex min-h-[9.5rem] min-w-[9.5rem] flex-col items-center justify-center rounded-2xl border px-4 shadow-xl sm:min-h-[10.5rem] sm:min-w-[10.5rem] ${
               opened
-                ? "border-rose-400/50 bg-linear-to-br from-violet-600/40 to-rose-900/30 shadow-rose-900/30"
-                : "border-rose-400/25 bg-linear-to-br from-violet-600/25 to-rose-900/20"
+                ? "border-violet-400/50 bg-linear-to-br from-violet-600/40 to-rose-900/30 shadow-violet-900/30"
+                : "border-violet-400/25 bg-linear-to-br from-violet-600/25 to-rose-900/20"
             }`}
           >
             <span className="text-5xl sm:text-6xl">{opened ? "🎁" : "🔒"}</span>
             <span className="mt-2 font-[family-name:var(--font-playfair)] text-sm text-rose-100">
-              {opened ? "Tap to meet them" : "A secret surprise"}
+              {opened ? "Tap to meet them" : "Locked surprise"}
             </span>
           </div>
         </motion.button>
@@ -113,6 +111,6 @@ export function ElephantSurprise({ onReveal }: ElephantSurpriseProps) {
       >
         {opened ? "Unlocked — go on, baba!" : "I want my surprise ♥"}
       </motion.button>
-    </motion.div>
+    </div>
   )
 }

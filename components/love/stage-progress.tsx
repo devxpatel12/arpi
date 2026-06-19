@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 
-const stages = ["gift", "letter", "reasons", "bouquet", "finale"] as const
+const stages = ["gift", "letter", "reasons", "bouquet", "finale", "surprise"] as const
 
 export function StageProgress({
   stage,

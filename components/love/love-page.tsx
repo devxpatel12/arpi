@@ -19,16 +19,12 @@ import { SealedNote } from "./sealed-note"
 import { StageProgress } from "./stage-progress"
 
 const messages = [
-  { text: "I love you so much, baba. ♥", highlight: true },
+  { text: "You make every day brighter, baba. ♥", highlight: true },
   { text: "Time se khana khaya karo, baba. 🍽️", highlight: true },
   { text: "Take care, meri jaan. You mean everything.", highlight: true },
-  {
-    text: "Every flower here — picked just for you.",
-    highlight: false,
-  },
 ]
 
-type Stage = "gift" | "letter" | "reasons" | "bouquet" | "finale"
+type Stage = "gift" | "letter" | "reasons" | "bouquet" | "finale" | "surprise"
 
 export function LovePage() {
   const [stage, setStage] = useState<Stage>("gift")
@@ -59,7 +55,13 @@ export function LovePage() {
       <StageProgress stage={stage} />
       <ElephantPet visible={elephantRevealed} />
 
-      <main className="love-safe-top love-safe-bottom relative z-10 mx-auto flex min-h-dvh w-full max-w-md flex-col items-center justify-center px-4 py-4 sm:px-5">
+      <main
+        className={`love-safe-top love-safe-bottom relative z-10 mx-auto flex w-full max-w-md flex-col items-center px-4 sm:px-5 ${
+          stage === "finale" && revealed
+            ? "h-dvh max-h-dvh justify-between overflow-hidden py-2 pt-10"
+            : "min-h-dvh justify-center py-4"
+        }`}
+      >
         <AnimatePresence mode="wait">
           {stage === "gift" && (
             <motion.div
@@ -149,7 +151,9 @@ export function LovePage() {
           {stage === "finale" && (
             <motion.div
               key="finale"
-              className="flex w-full flex-col items-center gap-4 text-center sm:gap-5"
+              className={`flex w-full flex-col items-center text-center ${
+                revealed ? "h-full flex-1" : "gap-4 sm:gap-5"
+              }`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
@@ -177,40 +181,60 @@ export function LovePage() {
                 </>
               ) : (
                 <motion.div
-                  className="flex w-full flex-col items-center gap-4 pb-2 sm:gap-5"
+                  className="flex h-full w-full flex-col items-center justify-between gap-2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
-                  <MegaBouquet />
+                  <div className="flex w-full flex-col items-center gap-2">
+                    <MegaBouquet compact />
+                    <h2 className="font-[family-name:var(--font-dancing)] love-shimmer shrink-0 text-2xl sm:text-3xl">
+                      For you, Arpita
+                    </h2>
+                    <div className="flex w-full items-center justify-center gap-3 sm:gap-4">
+                      <SealedNote compact />
+                      <HeartTap compact onTap={burst} />
+                    </div>
+                    <ComplimentPop compact />
+                  </div>
 
-                  <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-3xl sm:text-5xl">
-                    For you, Arpita
-                  </h2>
-                  <p className="max-w-[18rem] font-[family-name:var(--font-playfair)] text-sm text-rose-100/80 italic sm:max-w-none sm:text-base">
-                    Hand-wrapped with love, baba. Every petal, for you.
-                  </p>
-
-                  <SealedNote />
-                  <HeartTap onTap={burst} />
-                  <ComplimentPop />
-
-                  <p className="font-[family-name:var(--font-playfair)] text-sm text-rose-200/70 italic">
-                    Khush raho, baba. Always yours. ♥
-                  </p>
-
-                  {!elephantRevealed ? (
-                    <ElephantSurprise
-                      onReveal={() => {
-                        setElephantRevealed(true)
-                        setConfetti(true)
-                        burst()
-                        setTimeout(() => setConfetti(false), 1500)
-                      }}
-                    />
-                  ) : (
-                    <ElephantReveal />
-                  )}
+                  <motion.button
+                    type="button"
+                    onClick={() => {
+                      burst()
+                      setStage("surprise")
+                    }}
+                    className="love-tap mb-1 min-h-12 w-full max-w-xs shrink-0 rounded-full bg-linear-to-r from-violet-500 to-rose-500 px-6 py-3.5 font-[family-name:var(--font-playfair)] text-sm tracking-wide text-white uppercase active:opacity-90 sm:max-w-sm"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    One more surprise… 🤫
+                  </motion.button>
                 </motion.div>
+              )}
+            </motion.div>
+          )}
+
+          {stage === "surprise" && (
+            <motion.div
+              key="surprise"
+              className="flex w-full flex-col items-center text-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+            >
+              {!elephantRevealed ? (
+                <ElephantSurprise
+                  onReveal={() => {
+                    setElephantRevealed(true)
+                    setConfetti(true)
+                    burst()
+                    setTimeout(() => setConfetti(false), 1500)
+                  }}
+                />
+              ) : (
+                <ElephantReveal />
               )}
             </motion.div>
           )}

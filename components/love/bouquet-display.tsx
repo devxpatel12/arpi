@@ -240,7 +240,7 @@ export function BouquetDisplay({
   )
 }
 
-export function MegaBouquet() {
+export function MegaBouquet({ compact }: { compact?: boolean }) {
   const allBunches = ["roses", "tulips", "cherry", "lilies"]
   const flowers = buildBouquetFlowers(allBunches)
 
@@ -268,7 +268,10 @@ export function MegaBouquet() {
         animate={{ rotate: [0, 0.5, -0.5, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       >
-        <BouquetDisplay flowers={[...flowers, ...extras]} size="mega" />
+        <BouquetDisplay
+          flowers={[...flowers, ...extras]}
+          size={compact ? "md" : "mega"}
+        />
       </motion.div>
     </motion.div>
   )

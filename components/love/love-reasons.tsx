@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 const reasons = [
   { emoji: "✨", text: "Your smile is my favourite thing in this world." },
   { emoji: "🌸", text: "You notice the little things — and that makes you rare, baba." },
-  { emoji: "🏠", text: "With you, I feel at home — every single day, baba." },
+  { emoji: "🏠", text: "With you, I feel at home — every single day." },
   { emoji: "💫", text: "You make ordinary moments feel magical." },
   { emoji: "🌙", text: "I'm proud of who you are — inside and out." },
   { emoji: "♥", text: "The world is softer because you're in it." },

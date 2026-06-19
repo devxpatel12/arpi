@@ -5,9 +5,10 @@ import { motion } from "framer-motion"
 
 interface HeartTapProps {
   onTap?: () => void
+  compact?: boolean
 }
 
-export function HeartTap({ onTap }: HeartTapProps) {
+export function HeartTap({ onTap, compact }: HeartTapProps) {
   const [count, setCount] = useState(0)
   const [pops, setPops] = useState<{ id: number; x: number; y: number }[]>([])
   const idRef = useRef(0)
@@ -43,17 +44,21 @@ export function HeartTap({ onTap }: HeartTapProps) {
           : "I feel so loved! 🥹♥"
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className={`flex flex-col items-center ${compact ? "gap-1" : "gap-2"}`}>
       <motion.button
         type="button"
         onPointerDown={handlePointerDown}
-        className="love-tap relative flex size-24 cursor-pointer select-none items-center justify-center rounded-full active:bg-rose-500/10 sm:size-28"
+        className={`love-tap relative flex cursor-pointer select-none items-center justify-center rounded-full active:bg-rose-500/10 ${
+          compact ? "size-16 sm:size-[4.5rem]" : "size-24 sm:size-28"
+        }`}
         whileTap={{ scale: 1.2 }}
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ scale: { duration: 1.2, repeat: Infinity } }}
         aria-label="Send love"
       >
-        <span className="pointer-events-none text-6xl sm:text-7xl">❤️</span>
+        <span className={`pointer-events-none ${compact ? "text-4xl sm:text-5xl" : "text-6xl sm:text-7xl"}`}>
+          ❤️
+        </span>
         {pops.map((p) => (
           <motion.span
             key={p.id}
@@ -67,7 +72,7 @@ export function HeartTap({ onTap }: HeartTapProps) {
           </motion.span>
         ))}
       </motion.button>
-      <p className="font-[family-name:var(--font-playfair)] text-sm text-rose-200/70">
+      <p className={`font-[family-name:var(--font-playfair)] text-rose-200/70 ${compact ? "text-[11px]" : "text-sm"}`}>
         {label}
       </p>
     </div>
