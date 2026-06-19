@@ -4,13 +4,13 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 
 const compliments = [
-  "You're the prettiest girl in the world. ♥",
-  "Meri jaan — I'm so lucky you're mine.",
-  "Your smile melts my heart every time.",
+  "You're the prettiest flower in my garden. 🌸",
+  "Meri jaan — bloom wherever you go.",
+  "Your smile is prettier than any rose.",
   "Nobody compares to you, Arpita.",
   "My favourite person. Always.",
-  "Tu meri duniya hai. 🌸",
-  "Cutest girl + best girlfriend ever.",
+  "Tu meri duniya hai. 🌷",
+  "Every flower reminds me of you.",
   "I fall for you more every day.",
 ]
 

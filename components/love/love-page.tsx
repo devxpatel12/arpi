@@ -2,24 +2,28 @@
 
 import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import { Gift, Heart } from "lucide-react"
+import { Heart } from "lucide-react"
 
+import { BouquetBuilder } from "./bouquet-builder"
+import { MegaBouquet } from "./bouquet-display"
 import { ComplimentPop } from "./compliment-pop"
 import { ConfettiBurst } from "./confetti-burst"
 import { Fireworks } from "./fireworks"
 import { FlowerRain } from "./flower-rain"
 import { HeartTap } from "./heart-tap"
 import { StageProgress } from "./stage-progress"
-import { WishCards } from "./wish-cards"
 
 const messages = [
   { text: "I love you so much, Arpita. ♥", highlight: true },
   { text: "Time se khana khaya karo, meri jaan.", highlight: true },
   { text: "Take care, my baby.", highlight: true },
-  { text: "You mean everything to me.", highlight: false },
+  {
+    text: "I picked every flower in this bouquet — just for you.",
+    highlight: false,
+  },
 ]
 
-type Stage = "gift" | "letter" | "surprises" | "finale"
+type Stage = "gift" | "letter" | "bouquet" | "finale"
 
 export function LovePage() {
   const [stage, setStage] = useState<Stage>("gift")
@@ -58,7 +62,7 @@ export function LovePage() {
             exit={{ opacity: 0, scale: 1.1 }}
           >
             <p className="font-[family-name:var(--font-playfair)] text-sm tracking-[0.25em] text-rose-200/70 uppercase">
-              For you only
+              A bouquet for you
             </p>
             <h1 className="font-[family-name:var(--font-dancing)] love-shimmer text-6xl sm:text-8xl">
               Arpita
@@ -73,10 +77,10 @@ export function LovePage() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.9 }}
             >
-              <div className="flex size-40 flex-col items-center justify-center rounded-2xl border border-rose-400/30 bg-linear-to-br from-rose-600/40 to-purple-800/40 shadow-xl sm:size-44">
-                <Gift className="size-14 text-rose-100 sm:size-16" />
+              <div className="flex size-40 flex-col items-center justify-center rounded-2xl border border-rose-400/30 bg-linear-to-br from-rose-600/40 to-emerald-900/30 shadow-xl sm:size-44">
+                <span className="text-6xl sm:text-7xl">💐</span>
                 <span className="mt-2 font-[family-name:var(--font-playfair)] text-sm text-rose-100">
-                  Tap to open
+                  Unwrap your flowers
                 </span>
               </div>
             </motion.button>
@@ -92,8 +96,10 @@ export function LovePage() {
             exit={{ opacity: 0, y: -20 }}
           >
             <div className="rounded-3xl border border-rose-300/20 bg-[#1a0a2e]/95 p-7 shadow-xl sm:p-8">
-              <div className="mb-5 flex justify-center">
+              <div className="mb-5 flex justify-center gap-2 text-2xl">
+                <span>🌹</span>
                 <Heart className="fill-rose-400 text-rose-400" />
+                <span>🌸</span>
               </div>
               <div className="flex flex-col gap-3">
                 {messages.map((msg, i) => (
@@ -116,7 +122,7 @@ export function LovePage() {
                 type="button"
                 onClick={() => {
                   burst()
-                  setStage("surprises")
+                  setStage("bouquet")
                 }}
                 className="mt-6 w-full cursor-pointer rounded-full bg-linear-to-r from-rose-500 to-pink-500 py-3 font-[family-name:var(--font-playfair)] text-sm tracking-wider text-white uppercase"
                 initial={{ opacity: 0 }}
@@ -124,16 +130,16 @@ export function LovePage() {
                 transition={{ delay: 1.4 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Your surprises 🎁
+                Build your bouquet 🌸
               </motion.button>
             </div>
           </motion.div>
         )}
 
-        {stage === "surprises" && (
-          <WishCards
-            key="surprises"
-            onFlip={burst}
+        {stage === "bouquet" && (
+          <BouquetBuilder
+            key="bouquet"
+            onAdd={burst}
             onComplete={() => {
               burst()
               setStage("finale")
@@ -150,7 +156,9 @@ export function LovePage() {
           >
             {!revealed ? (
               <>
-                <span className="text-6xl">💐</span>
+                <p className="font-[family-name:var(--font-playfair)] text-sm tracking-widest text-rose-200/60 uppercase">
+                  For my flower girl
+                </p>
                 <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-4xl sm:text-5xl">
                   You&apos;re my everything
                 </h2>
@@ -165,40 +173,26 @@ export function LovePage() {
                   className="cursor-pointer rounded-full bg-linear-to-r from-rose-500 to-pink-500 px-10 py-4 font-[family-name:var(--font-playfair)] text-sm tracking-wider text-white uppercase"
                   whileTap={{ scale: 0.95 }}
                 >
-                  I love you, my baby ♥
+                  Open your bouquet 💐
                 </motion.button>
               </>
             ) : (
               <motion.div
-                className="flex flex-col items-center gap-5"
+                className="flex flex-col items-center gap-4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-5xl sm:text-6xl">
-                  I love you, Arpita!
+                <MegaBouquet />
+
+                <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-4xl sm:text-5xl">
+                  For you, Arpita
                 </h2>
+                <p className="font-[family-name:var(--font-playfair)] text-sm text-rose-100/80 italic sm:text-base">
+                  A bouquet as big as my love — every petal, just for you.
+                </p>
 
                 <HeartTap onTap={burst} />
                 <ComplimentPop />
-
-                <div className="grid w-full grid-cols-2 gap-2">
-                  {[
-                    { emoji: "👗", text: "Dress shopping" },
-                    { emoji: "💅", text: "Nails day" },
-                    { emoji: "🧇", text: "Belgian waffle" },
-                    { emoji: "🍫", text: "Kinder Joy" },
-                  ].map((item) => (
-                    <div
-                      key={item.text}
-                      className="flex items-center gap-2 rounded-xl border border-rose-400/20 bg-rose-500/10 px-3 py-2"
-                    >
-                      <span>{item.emoji}</span>
-                      <span className="font-[family-name:var(--font-playfair)] text-xs text-rose-100 sm:text-sm">
-                        {item.text}
-                      </span>
-                    </div>
-                  ))}
-                </div>
 
                 <p className="font-[family-name:var(--font-playfair)] text-sm text-rose-200/70 italic">
                   Khush raho meri jaan. Always yours. ♥
