@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 const compliments = [
   "You're the prettiest flower in my garden, baba. 🌸",
-  "Meri baba — bloom wherever you go.",
+  "Meri jaan — bloom wherever you go.",
   "Your smile is prettier than any rose, jaan.",
   "Nobody compares to you, Arpita.",
   "My favourite baba. Always.",

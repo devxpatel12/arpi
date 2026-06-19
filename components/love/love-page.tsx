@@ -4,6 +4,8 @@ import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { Heart } from "lucide-react"
 
+import { ElephantPet, ElephantReveal } from "./elephant-pet"
+import { ElephantSurprise } from "./elephant-surprise"
 import { GiftGate } from "./gift-gate"
 import { BouquetBuilder } from "./bouquet-builder"
 import { MegaBouquet } from "./bouquet-display"
@@ -12,23 +14,26 @@ import { ConfettiBurst } from "./confetti-burst"
 import { Fireworks } from "./fireworks"
 import { FlowerRain } from "./flower-rain"
 import { HeartTap } from "./heart-tap"
+import { LoveReasons } from "./love-reasons"
+import { SealedNote } from "./sealed-note"
 import { StageProgress } from "./stage-progress"
 
 const messages = [
-  { text: "I love you so much, Arpita baba. ♥", highlight: true },
+  { text: "I love you so much, baba. ♥", highlight: true },
   { text: "Time se khana khaya karo, baba. 🍽️", highlight: true },
-  { text: "Take care, meri baba. You mean everything.", highlight: true },
+  { text: "Take care, meri jaan. You mean everything.", highlight: true },
   {
     text: "Every flower here — picked just for you.",
     highlight: false,
   },
 ]
 
-type Stage = "gift" | "letter" | "bouquet" | "finale"
+type Stage = "gift" | "letter" | "reasons" | "bouquet" | "finale"
 
 export function LovePage() {
   const [stage, setStage] = useState<Stage>("gift")
   const [revealed, setRevealed] = useState(false)
+  const [elephantRevealed, setElephantRevealed] = useState(false)
   const [confetti, setConfetti] = useState(false)
   const [fireworkKey, setFireworkKey] = useState(0)
 
@@ -52,6 +57,7 @@ export function LovePage() {
       <Fireworks burstKey={fireworkKey} />
       <ConfettiBurst active={confetti} />
       <StageProgress stage={stage} />
+      <ElephantPet visible={elephantRevealed} />
 
       <main className="love-safe-top love-safe-bottom relative z-10 mx-auto flex min-h-dvh w-full max-w-md flex-col items-center justify-center px-4 py-4 sm:px-5">
         <AnimatePresence mode="wait">
@@ -102,7 +108,7 @@ export function LovePage() {
                   type="button"
                   onClick={() => {
                     burst()
-                    setStage("bouquet")
+                    setStage("reasons")
                   }}
                   className="love-tap mt-5 min-h-12 w-full cursor-pointer rounded-full bg-linear-to-r from-rose-500 to-pink-500 py-3.5 font-[family-name:var(--font-playfair)] text-sm tracking-wide text-white uppercase active:opacity-90 sm:mt-6"
                   initial={{ opacity: 0 }}
@@ -110,10 +116,21 @@ export function LovePage() {
                   transition={{ delay: 1.2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Build your bouquet 🌸
+                  See why you&apos;re special ✨
                 </motion.button>
               </div>
             </motion.div>
+          )}
+
+          {stage === "reasons" && (
+            <LoveReasons
+              key="reasons"
+              onReveal={burst}
+              onComplete={() => {
+                burst()
+                setStage("bouquet")
+              }}
+            />
           )}
 
           {stage === "bouquet" && (
@@ -122,7 +139,9 @@ export function LovePage() {
               onAdd={burst}
               onComplete={() => {
                 burst()
+                setConfetti(true)
                 setStage("finale")
+                setTimeout(() => setConfetti(false), 1500)
               }}
             />
           )}
@@ -153,7 +172,7 @@ export function LovePage() {
                     className="love-tap min-h-12 cursor-pointer rounded-full bg-linear-to-r from-rose-500 to-pink-500 px-8 py-4 font-[family-name:var(--font-playfair)] text-sm tracking-wide text-white uppercase active:opacity-90 sm:px-10"
                     whileTap={{ scale: 0.97 }}
                   >
-                    Open your bouquet 💐
+                    Unwrap your bouquet 💐
                   </motion.button>
                 </>
               ) : (
@@ -168,15 +187,29 @@ export function LovePage() {
                     For you, Arpita
                   </h2>
                   <p className="max-w-[18rem] font-[family-name:var(--font-playfair)] text-sm text-rose-100/80 italic sm:max-w-none sm:text-base">
-                    A bouquet as big as my love, baba. Every petal, for you.
+                    Hand-wrapped with love, baba. Every petal, for you.
                   </p>
 
+                  <SealedNote />
                   <HeartTap onTap={burst} />
                   <ComplimentPop />
 
                   <p className="font-[family-name:var(--font-playfair)] text-sm text-rose-200/70 italic">
-                    Khush raho baba, meri jaan. Always yours. ♥
+                    Khush raho, baba. Always yours. ♥
                   </p>
+
+                  {!elephantRevealed ? (
+                    <ElephantSurprise
+                      onReveal={() => {
+                        setElephantRevealed(true)
+                        setConfetti(true)
+                        burst()
+                        setTimeout(() => setConfetti(false), 1500)
+                      }}
+                    />
+                  ) : (
+                    <ElephantReveal />
+                  )}
                 </motion.div>
               )}
             </motion.div>

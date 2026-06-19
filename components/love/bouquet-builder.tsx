@@ -76,7 +76,7 @@ export function BouquetBuilder({ onComplete, onAdd }: BouquetBuilderProps) {
         </p>
       </div>
 
-      <div className="w-full rounded-2xl border border-rose-400/20 bg-[#1a0828]/80 px-3 py-2 sm:rounded-3xl sm:px-4 sm:py-3">
+      <div className="w-full overflow-hidden rounded-2xl border border-rose-400/20 bg-linear-to-b from-[#1a0828]/90 to-[#0d0518]/90 px-2 py-3 sm:rounded-3xl sm:px-3 sm:py-4">
         <BouquetDisplay
           flowers={flowers}
           size={added.length >= 3 ? "lg" : added.length >= 1 ? "md" : "sm"}
