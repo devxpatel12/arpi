@@ -4,6 +4,7 @@ import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { Heart } from "lucide-react"
 
+import { GiftGate } from "./gift-gate"
 import { BouquetBuilder } from "./bouquet-builder"
 import { MegaBouquet } from "./bouquet-display"
 import { ComplimentPop } from "./compliment-pop"
@@ -14,9 +15,9 @@ import { HeartTap } from "./heart-tap"
 import { StageProgress } from "./stage-progress"
 
 const messages = [
-  { text: "I love you so much, Arpita. ♥", highlight: true },
-  { text: "Time se khana khaya karo, meri jaan.", highlight: true },
-  { text: "Take care, my baby.", highlight: true },
+  { text: "I love you so much, Arpita baba. ♥", highlight: true },
+  { text: "Time se khana khaya karo, baba. 🍽️", highlight: true },
+  { text: "Take care, meri baba. You mean everything.", highlight: true },
   {
     text: "Every flower here — picked just for you.",
     highlight: false,
@@ -57,33 +58,12 @@ export function LovePage() {
           {stage === "gift" && (
             <motion.div
               key="gift"
-              className="flex w-full flex-col items-center gap-5 text-center sm:gap-6"
+              className="w-full"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.05 }}
             >
-              <p className="font-[family-name:var(--font-playfair)] text-xs tracking-[0.2em] text-rose-200/70 uppercase sm:text-sm sm:tracking-[0.25em]">
-                A bouquet for you
-              </p>
-              <h1 className="font-[family-name:var(--font-dancing)] love-shimmer text-5xl sm:text-7xl">
-                Arpita
-              </h1>
-
-              <motion.button
-                type="button"
-                onClick={openGift}
-                className="love-tap relative cursor-pointer"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                whileTap={{ scale: 0.92 }}
-              >
-                <div className="flex min-h-[10.5rem] min-w-[10.5rem] flex-col items-center justify-center rounded-2xl border border-rose-400/30 bg-linear-to-br from-rose-600/40 to-emerald-900/30 px-4 shadow-xl active:border-rose-400/50 sm:min-h-[11rem] sm:min-w-[11rem]">
-                  <span className="text-5xl sm:text-6xl">💐</span>
-                  <span className="mt-2 font-[family-name:var(--font-playfair)] text-sm text-rose-100">
-                    Tap to open
-                  </span>
-                </div>
-              </motion.button>
+              <GiftGate onOpen={openGift} onAccept={burst} />
             </motion.div>
           )}
 
@@ -157,7 +137,7 @@ export function LovePage() {
               {!revealed ? (
                 <>
                   <p className="font-[family-name:var(--font-playfair)] text-xs tracking-widest text-rose-200/60 uppercase sm:text-sm">
-                    For my flower girl
+                    For my baba
                   </p>
                   <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-3xl sm:text-5xl">
                     You&apos;re my everything
@@ -188,14 +168,14 @@ export function LovePage() {
                     For you, Arpita
                   </h2>
                   <p className="max-w-[18rem] font-[family-name:var(--font-playfair)] text-sm text-rose-100/80 italic sm:max-w-none sm:text-base">
-                    A bouquet as big as my love. Every petal, for you.
+                    A bouquet as big as my love, baba. Every petal, for you.
                   </p>
 
                   <HeartTap onTap={burst} />
                   <ComplimentPop />
 
                   <p className="font-[family-name:var(--font-playfair)] text-sm text-rose-200/70 italic">
-                    Khush raho meri jaan. Always yours. ♥
+                    Khush raho baba, meri jaan. Always yours. ♥
                   </p>
                 </motion.div>
               )}

@@ -39,7 +39,7 @@ export function HeartTap({ onTap }: HeartTapProps) {
       : count < 5
         ? `${count} love${count > 1 ? "s" : ""} sent ♥`
         : count < 15
-          ? "Keep going, baby! 💕"
+          ? "Keep going, baba! 💕"
           : "I feel so loved! 🥹♥"
 
   return (

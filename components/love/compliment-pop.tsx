@@ -4,14 +4,14 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 
 const compliments = [
-  "You're the prettiest flower in my garden. 🌸",
-  "Meri jaan — bloom wherever you go.",
-  "Your smile is prettier than any rose.",
+  "You're the prettiest flower in my garden, baba. 🌸",
+  "Meri baba — bloom wherever you go.",
+  "Your smile is prettier than any rose, jaan.",
   "Nobody compares to you, Arpita.",
-  "My favourite person. Always.",
-  "Tu meri duniya hai. 🌷",
+  "My favourite baba. Always.",
+  "Tu meri duniya hai, baba. 🌷",
   "Every flower reminds me of you.",
-  "I fall for you more every day.",
+  "I fall for you more every day, meri jaan.",
 ]
 
 export function ComplimentPop() {

@@ -5,9 +5,9 @@ import { motion } from "framer-motion"
 const words = [
   { text: "Arpita", left: "8%", top: "12%", size: "text-2xl", delay: 0, duration: 14 },
   { text: "I love you", left: "75%", top: "18%", size: "text-lg", delay: 2, duration: 16 },
-  { text: "meri jaan", left: "85%", top: "55%", size: "text-xl", delay: 4, duration: 12 },
+  { text: "baba ♥", left: "85%", top: "55%", size: "text-xl", delay: 4, duration: 12 },
   { text: "♥ forever ♥", left: "5%", top: "70%", size: "text-base", delay: 1, duration: 18 },
-  { text: "my baby", left: "60%", top: "82%", size: "text-lg", delay: 3, duration: 15 },
+  { text: "my baba", left: "60%", top: "82%", size: "text-lg", delay: 3, duration: 15 },
   { text: "💕", left: "40%", top: "8%", size: "text-3xl", delay: 5, duration: 11 },
   { text: "🌸", left: "25%", top: "45%", size: "text-2xl", delay: 2.5, duration: 13 },
   { text: "Arpita ♥", left: "50%", top: "90%", size: "text-xl", delay: 6, duration: 17 },
