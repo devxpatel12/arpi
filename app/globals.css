@@ -128,3 +128,49 @@
     @apply font-sans;
   }
 }
+
+@keyframes love-fall {
+  0% {
+    transform: translateY(-5vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes love-shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.love-shimmer {
+  background: linear-gradient(
+    90deg,
+    #fda4af,
+    #fef08a,
+    #f9a8d4,
+    #fda4af
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: love-shimmer 3s linear infinite;
+}
+
+.love-petal {
+  animation: love-fall linear infinite;
+  will-change: transform;
+}

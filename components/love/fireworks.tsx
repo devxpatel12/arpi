@@ -12,20 +12,17 @@ interface Particle {
   dist: number
 }
 
-const colors = ["#fb7185", "#f472b6", "#e879f9", "#fbbf24", "#fda4af", "#ffffff"]
+const colors = ["#fb7185", "#f472b6", "#fbbf24", "#fda4af"]
 
-function createParticles(nextId: () => number): Particle[] {
-  const cx = 15 + Math.random() * 70
-  const cy = 15 + Math.random() * 60
+function createBurst(nextId: () => number, cx: number, cy: number): Particle[] {
   const color = colors[Math.floor(Math.random() * colors.length)]
-
-  return Array.from({ length: 24 }, (_, i) => ({
+  return Array.from({ length: 12 }, (_, i) => ({
     key: `fw-${nextId()}`,
     x: cx,
     y: cy,
     color,
-    angle: (i / 24) * 360,
-    dist: 60 + Math.random() * 80,
+    angle: (i / 12) * 360,
+    dist: 50 + Math.random() * 50,
   }))
 }
 
@@ -33,22 +30,19 @@ export function Fireworks({ burstKey }: { burstKey: number }) {
   const [particles, setParticles] = useState<Particle[]>([])
   const idRef = useRef(0)
 
-  function nextId() {
-    idRef.current += 1
-    return idRef.current
-  }
-
   useEffect(() => {
     if (burstKey === 0) return
 
-    const newParticles = Array.from({ length: 5 }, () => createParticles(nextId)).flat()
+    const cx = 20 + Math.random() * 60
+    const cy = 20 + Math.random() * 50
+    const newParticles = createBurst(() => ++idRef.current, cx, cy)
     const newKeys = new Set(newParticles.map((p) => p.key))
 
-    setParticles((prev) => [...prev, ...newParticles])
+    setParticles((prev) => [...prev.slice(-24), ...newParticles])
 
     const timer = setTimeout(() => {
       setParticles((prev) => prev.filter((p) => !newKeys.has(p.key)))
-    }, 2000)
+    }, 1200)
 
     return () => clearTimeout(timer)
   }, [burstKey])
@@ -59,22 +53,19 @@ export function Fireworks({ burstKey }: { burstKey: number }) {
         {particles.map((p) => (
           <motion.div
             key={p.key}
-            className="absolute size-2 rounded-full"
+            className="absolute size-1.5 rounded-full sm:size-2"
             style={{
               left: `${p.x}%`,
               top: `${p.y}%`,
               backgroundColor: p.color,
-              boxShadow: `0 0 8px ${p.color}`,
             }}
-            initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+            initial={{ x: 0, y: 0, opacity: 1 }}
             animate={{
               x: Math.cos((p.angle * Math.PI) / 180) * p.dist,
               y: Math.sin((p.angle * Math.PI) / 180) * p.dist,
               opacity: 0,
-              scale: 0,
             }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
           />
         ))}
       </AnimatePresence>
