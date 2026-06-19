@@ -18,7 +18,7 @@ const messages = [
   { text: "Time se khana khaya karo, meri jaan.", highlight: true },
   { text: "Take care, my baby.", highlight: true },
   {
-    text: "I picked every flower in this bouquet — just for you.",
+    text: "Every flower here — picked just for you.",
     highlight: false,
   },
 ]
@@ -43,7 +43,7 @@ export function LovePage() {
   }
 
   return (
-    <div className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-[#0a0014] px-4 py-16">
+    <div className="relative min-h-dvh w-full overflow-x-hidden bg-[#0a0014]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(236,72,153,0.18)_0%,transparent_55%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(168,85,247,0.12)_0%,transparent_55%)]" />
 
@@ -52,156 +52,157 @@ export function LovePage() {
       <ConfettiBurst active={confetti} />
       <StageProgress stage={stage} />
 
-      <AnimatePresence mode="wait">
-        {stage === "gift" && (
-          <motion.div
-            key="gift"
-            className="relative z-10 flex flex-col items-center gap-6 text-center"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-          >
-            <p className="font-[family-name:var(--font-playfair)] text-sm tracking-[0.25em] text-rose-200/70 uppercase">
-              A bouquet for you
-            </p>
-            <h1 className="font-[family-name:var(--font-dancing)] love-shimmer text-6xl sm:text-8xl">
-              Arpita
-            </h1>
-
-            <motion.button
-              type="button"
-              onClick={openGift}
-              className="relative cursor-pointer"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.9 }}
+      <main className="love-safe-top love-safe-bottom relative z-10 mx-auto flex min-h-dvh w-full max-w-md flex-col items-center justify-center px-4 py-4 sm:px-5">
+        <AnimatePresence mode="wait">
+          {stage === "gift" && (
+            <motion.div
+              key="gift"
+              className="flex w-full flex-col items-center gap-5 text-center sm:gap-6"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
             >
-              <div className="flex size-40 flex-col items-center justify-center rounded-2xl border border-rose-400/30 bg-linear-to-br from-rose-600/40 to-emerald-900/30 shadow-xl sm:size-44">
-                <span className="text-6xl sm:text-7xl">💐</span>
-                <span className="mt-2 font-[family-name:var(--font-playfair)] text-sm text-rose-100">
-                  Unwrap your flowers
-                </span>
-              </div>
-            </motion.button>
-          </motion.div>
-        )}
+              <p className="font-[family-name:var(--font-playfair)] text-xs tracking-[0.2em] text-rose-200/70 uppercase sm:text-sm sm:tracking-[0.25em]">
+                A bouquet for you
+              </p>
+              <h1 className="font-[family-name:var(--font-dancing)] love-shimmer text-5xl sm:text-7xl">
+                Arpita
+              </h1>
 
-        {stage === "letter" && (
-          <motion.div
-            key="letter"
-            className="relative z-10 w-full max-w-md"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <div className="rounded-3xl border border-rose-300/20 bg-[#1a0a2e]/95 p-7 shadow-xl sm:p-8">
-              <div className="mb-5 flex justify-center gap-2 text-2xl">
-                <span>🌹</span>
-                <Heart className="fill-rose-400 text-rose-400" />
-                <span>🌸</span>
-              </div>
-              <div className="flex flex-col gap-3">
-                {messages.map((msg, i) => (
-                  <motion.p
-                    key={i}
-                    className={`font-[family-name:var(--font-playfair)] text-base sm:text-lg ${
-                      msg.highlight
-                        ? "rounded-xl border border-rose-400/20 bg-rose-500/10 px-4 py-2.5 text-rose-100"
-                        : "text-center text-rose-100/90"
-                    }`}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.35 }}
-                  >
-                    {msg.text}
-                  </motion.p>
-                ))}
-              </div>
               <motion.button
                 type="button"
-                onClick={() => {
-                  burst()
-                  setStage("bouquet")
-                }}
-                className="mt-6 w-full cursor-pointer rounded-full bg-linear-to-r from-rose-500 to-pink-500 py-3 font-[family-name:var(--font-playfair)] text-sm tracking-wider text-white uppercase"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.4 }}
-                whileTap={{ scale: 0.97 }}
+                onClick={openGift}
+                className="love-tap relative cursor-pointer"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                whileTap={{ scale: 0.92 }}
               >
-                Build your bouquet 🌸
+                <div className="flex min-h-[10.5rem] min-w-[10.5rem] flex-col items-center justify-center rounded-2xl border border-rose-400/30 bg-linear-to-br from-rose-600/40 to-emerald-900/30 px-4 shadow-xl active:border-rose-400/50 sm:min-h-[11rem] sm:min-w-[11rem]">
+                  <span className="text-5xl sm:text-6xl">💐</span>
+                  <span className="mt-2 font-[family-name:var(--font-playfair)] text-sm text-rose-100">
+                    Tap to open
+                  </span>
+                </div>
               </motion.button>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          )}
 
-        {stage === "bouquet" && (
-          <BouquetBuilder
-            key="bouquet"
-            onAdd={burst}
-            onComplete={() => {
-              burst()
-              setStage("finale")
-            }}
-          />
-        )}
-
-        {stage === "finale" && (
-          <motion.div
-            key="finale"
-            className="relative z-10 flex w-full max-w-md flex-col items-center gap-5 text-center"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-          >
-            {!revealed ? (
-              <>
-                <p className="font-[family-name:var(--font-playfair)] text-sm tracking-widest text-rose-200/60 uppercase">
-                  For my flower girl
-                </p>
-                <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-4xl sm:text-5xl">
-                  You&apos;re my everything
-                </h2>
+          {stage === "letter" && (
+            <motion.div
+              key="letter"
+              className="w-full"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+            >
+              <div className="rounded-2xl border border-rose-300/20 bg-[#1a0a2e]/95 p-5 shadow-xl sm:rounded-3xl sm:p-7">
+                <div className="mb-4 flex justify-center gap-2 text-xl sm:mb-5 sm:text-2xl">
+                  <span>🌹</span>
+                  <Heart className="fill-rose-400 text-rose-400" />
+                  <span>🌸</span>
+                </div>
+                <div className="flex flex-col gap-2.5 sm:gap-3">
+                  {messages.map((msg, i) => (
+                    <motion.p
+                      key={i}
+                      className={`font-[family-name:var(--font-playfair)] text-[15px] leading-snug sm:text-base ${
+                        msg.highlight
+                          ? "rounded-xl border border-rose-400/20 bg-rose-500/10 px-3.5 py-2.5 text-rose-100 sm:px-4"
+                          : "text-center text-rose-100/90"
+                      }`}
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.3 }}
+                    >
+                      {msg.text}
+                    </motion.p>
+                  ))}
+                </div>
                 <motion.button
                   type="button"
                   onClick={() => {
-                    setRevealed(true)
-                    setConfetti(true)
                     burst()
-                    setTimeout(() => setConfetti(false), 1500)
+                    setStage("bouquet")
                   }}
-                  className="cursor-pointer rounded-full bg-linear-to-r from-rose-500 to-pink-500 px-10 py-4 font-[family-name:var(--font-playfair)] text-sm tracking-wider text-white uppercase"
-                  whileTap={{ scale: 0.95 }}
+                  className="love-tap mt-5 min-h-12 w-full cursor-pointer rounded-full bg-linear-to-r from-rose-500 to-pink-500 py-3.5 font-[family-name:var(--font-playfair)] text-sm tracking-wide text-white uppercase active:opacity-90 sm:mt-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.2 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  Open your bouquet 💐
+                  Build your bouquet 🌸
                 </motion.button>
-              </>
-            ) : (
-              <motion.div
-                className="flex flex-col items-center gap-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                <MegaBouquet />
+              </div>
+            </motion.div>
+          )}
 
-                <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-4xl sm:text-5xl">
-                  For you, Arpita
-                </h2>
-                <p className="font-[family-name:var(--font-playfair)] text-sm text-rose-100/80 italic sm:text-base">
-                  A bouquet as big as my love — every petal, just for you.
-                </p>
+          {stage === "bouquet" && (
+            <BouquetBuilder
+              key="bouquet"
+              onAdd={burst}
+              onComplete={() => {
+                burst()
+                setStage("finale")
+              }}
+            />
+          )}
 
-                <HeartTap onTap={burst} />
-                <ComplimentPop />
+          {stage === "finale" && (
+            <motion.div
+              key="finale"
+              className="flex w-full flex-col items-center gap-4 text-center sm:gap-5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              {!revealed ? (
+                <>
+                  <p className="font-[family-name:var(--font-playfair)] text-xs tracking-widest text-rose-200/60 uppercase sm:text-sm">
+                    For my flower girl
+                  </p>
+                  <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-3xl sm:text-5xl">
+                    You&apos;re my everything
+                  </h2>
+                  <motion.button
+                    type="button"
+                    onClick={() => {
+                      setRevealed(true)
+                      setConfetti(true)
+                      burst()
+                      setTimeout(() => setConfetti(false), 1500)
+                    }}
+                    className="love-tap min-h-12 cursor-pointer rounded-full bg-linear-to-r from-rose-500 to-pink-500 px-8 py-4 font-[family-name:var(--font-playfair)] text-sm tracking-wide text-white uppercase active:opacity-90 sm:px-10"
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    Open your bouquet 💐
+                  </motion.button>
+                </>
+              ) : (
+                <motion.div
+                  className="flex w-full flex-col items-center gap-4 pb-2 sm:gap-5"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <MegaBouquet />
 
-                <p className="font-[family-name:var(--font-playfair)] text-sm text-rose-200/70 italic">
-                  Khush raho meri jaan. Always yours. ♥
-                </p>
-              </motion.div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  <h2 className="font-[family-name:var(--font-dancing)] love-shimmer text-3xl sm:text-5xl">
+                    For you, Arpita
+                  </h2>
+                  <p className="max-w-[18rem] font-[family-name:var(--font-playfair)] text-sm text-rose-100/80 italic sm:max-w-none sm:text-base">
+                    A bouquet as big as my love. Every petal, for you.
+                  </p>
+
+                  <HeartTap onTap={burst} />
+                  <ComplimentPop />
+
+                  <p className="font-[family-name:var(--font-playfair)] text-sm text-rose-200/70 italic">
+                    Khush raho meri jaan. Always yours. ♥
+                  </p>
+                </motion.div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </main>
     </div>
   )
 }

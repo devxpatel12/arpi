@@ -12,14 +12,17 @@ export function StageProgress({
   const current = stages.indexOf(stage)
 
   return (
-    <div className="fixed top-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2">
+    <div
+      className="fixed left-1/2 z-50 flex -translate-x-1/2 items-center gap-1.5 sm:gap-2"
+      style={{ top: "max(0.75rem, env(safe-area-inset-top))" }}
+    >
       {stages.map((s, i) => (
         <motion.div
           key={s}
-          className={`h-1.5 rounded-full transition-all ${
+          className={`h-1 rounded-full sm:h-1.5 ${
             i <= current ? "bg-rose-400" : "bg-rose-900/50"
           }`}
-          animate={{ width: i <= current ? 28 : 12 }}
+          animate={{ width: i <= current ? 24 : 10 }}
           transition={{ duration: 0.4 }}
         />
       ))}

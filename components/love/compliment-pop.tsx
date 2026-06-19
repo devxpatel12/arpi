@@ -24,19 +24,18 @@ export function ComplimentPop() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex w-full flex-col items-center gap-3 px-2">
       <motion.button
         type="button"
         onClick={next}
-        className="cursor-pointer rounded-full border border-rose-400/30 bg-rose-500/10 px-5 py-2 font-[family-name:var(--font-playfair)] text-xs tracking-wide text-rose-200 uppercase sm:text-sm"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        className="love-tap min-h-11 w-full max-w-xs cursor-pointer rounded-full border border-rose-400/30 bg-rose-500/10 px-5 py-3 font-[family-name:var(--font-playfair)] text-sm text-rose-200 active:bg-rose-500/20"
+        whileTap={{ scale: 0.97 }}
       >
         Say something sweet 💬
       </motion.button>
       <motion.p
         key={key}
-        className="max-w-xs text-center font-[family-name:var(--font-dancing)] text-xl text-pink-200 sm:text-2xl"
+        className="max-w-[min(100%,20rem)] text-center font-[family-name:var(--font-dancing)] text-xl text-pink-200 sm:text-2xl"
         initial={{ opacity: 0, y: 10, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", stiffness: 200 }}

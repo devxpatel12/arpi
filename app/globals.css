@@ -174,3 +174,22 @@
   animation: love-fall linear infinite;
   will-change: transform;
 }
+
+.love-tap {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.love-safe-top {
+  padding-top: max(3.75rem, calc(env(safe-area-inset-top) + 2.5rem));
+}
+
+.love-safe-bottom {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 640px) {
+  .love-petal-mobile-hide:nth-child(n + 9) {
+    display: none;
+  }
+}
